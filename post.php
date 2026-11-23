@@ -119,6 +119,31 @@ if ($post) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Basic SEO -->
+<meta name="description" content="<?= escapeHtml($metaDescription) ?>">
+<link rel="canonical" href="<?= escapeHtml($canonicalUrl) ?>">
+
+<!-- Open Graph SEO -->
+<meta property="og:title" content="<?= escapeHtml($seoTitle) ?>">
+<meta property="og:description" content="<?= escapeHtml($metaDescription) ?>">
+<meta property="og:url" content="<?= escapeHtml($canonicalUrl) ?>">
+<meta property="og:type" content="<?= escapeHtml($ogType) ?>">
+<meta property="og:site_name" content="DeepshiTech">
+
+<?php if ($ogImageUrl !== ''): ?>
+<meta property="og:image" content="<?= escapeHtml($ogImageUrl) ?>">
+<?php endif; ?>
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="<?= escapeHtml($seoTitle) ?>">
+<meta name="twitter:description" content="<?= escapeHtml($metaDescription) ?>">
+
+<?php if ($ogImageUrl !== ''): ?>
+<meta name="twitter:image" content="<?= escapeHtml($ogImageUrl) ?>">
+<?php endif; ?>
+
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- bootstrap grid css -->
     <link rel="stylesheet" href="../css/plugins/bootstrap-grid.css">
