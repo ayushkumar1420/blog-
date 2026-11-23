@@ -27,10 +27,42 @@ foreach ($allPosts as $item) {
 
 if (!$post) {
     http_response_code(404);
-    $pageTitle = 'Blog Not Found | DeepshiTech';
+
+    $seoTitle = 'Blog Not Found | DeepshiTech';
+    $metaDescription = 'The requested blog article could not be found.';
+    $canonicalUrl = 'https://deepshitech.com/blog/';
 } else {
-    $pageTitle = (string) ($post['title'] ?? 'Blog') . ' | DeepshiTech';
+    $seoTitle = trim((string) ($post['seo_title'] ?? ''));
+
+    if ($seoTitle === '') {
+        $seoTitle = (string) ($post['title'] ?? 'Blog') . ' | DeepshiTech';
+    }
+
+    $metaDescription = trim((string) ($post['meta_description'] ?? ''));
+
+    if ($metaDescription === '') {
+        $metaDescription = trim(strip_tags((string) ($post['excerpt'] ?? '')));
+    }
+
+    if ($metaDescription === '') {
+        $metaDescription = trim(strip_tags((string) ($post['content'] ?? '')));
+    }
+
+    $metaDescription = preg_replace('/\s+/', ' ', $metaDescription);
+    $metaDescription = mb_substr($metaDescription, 0, 160, 'UTF-8');
+
+    $canonicalUrl = trim((string) ($post['canonical_url'] ?? ''));
+
+    if (
+        $canonicalUrl === '' ||
+        !filter_var($canonicalUrl, FILTER_VALIDATE_URL) ||
+        !in_array(strtolower((string) parse_url($canonicalUrl, PHP_URL_SCHEME)), ['http', 'https'], true)
+    ) {
+        $canonicalUrl = 'https://deepshitech.com/blog/post.php?slug=' . rawurlencode((string) ($post['slug'] ?? ''));
+    }
 }
+
+$pageTitle = $seoTitle;
 
 function postImageUrl($item): string {
     $image = (string) ($item['featured_image'] ?? '');
@@ -49,6 +81,20 @@ function postImageUrl($item): string {
 }
 
 $imageUrl = $post ? postImageUrl($post) : '';
+$ogImageUrl = '';
+
+if ($imageUrl !== '') {
+    if (preg_match('~^https?://~i', $imageUrl)) {
+        $ogImageUrl = $imageUrl;
+    } elseif (strpos($imageUrl, '/') === 0) {
+        $ogImageUrl = 'https://deepshitech.com' . $imageUrl;
+    } else {
+        $ogImageUrl = 'https://deepshitech.com/' . ltrim(str_replace('../', '', $imageUrl), '/');
+    }
+}
+
+$ogType = $post ? 'article' : 'website';
+
 $imageAlt = $post ? trim((string) ($post['image_alt'] ?? '')) : '';
 
 if ($imageAlt === '' && $post) {
