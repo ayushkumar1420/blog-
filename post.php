@@ -144,6 +144,48 @@ if ($post) {
 <meta name="twitter:image" content="<?= escapeHtml($ogImageUrl) ?>">
 <?php endif; ?>
 
+<?php
+$schemaImage = $ogImageUrl !== ''
+    ? $ogImageUrl
+    : '';
+
+$schemaAuthor = trim((string)($post['author'] ?? 'DeepshiTech'));
+
+$schemaPublished = $post['created_at'] ?? '';
+$schemaModified = $post['updated_at'] ?? $schemaPublished;
+
+$publishedDate = strtotime($schemaPublished);
+$modifiedDate = strtotime($schemaModified);
+?>
+
+<script type="application/ld+json">
+<?= json_encode([
+    '@context' => 'https://schema.org',
+    '@type' => 'BlogPosting',
+    'mainEntityOfPage' => [
+        '@type' => 'WebPage',
+        '@id' => $canonicalUrl
+    ],
+    'headline' => $seoTitle,
+    'description' => $metaDescription,
+    'image' => $schemaImage !== '' ? [$schemaImage] : [],
+    'author' => [
+        '@type' => 'Organization',
+        'name' => 'Deepshitech'
+    ],
+    'publisher' => [
+        '@type' => 'Organization',
+        'name' => 'DeepshiTech'
+    ],
+    'datePublished' => $publishedDate
+        ? date('c', $publishedDate)
+        : null,
+    'dateModified' => $modifiedDate
+        ? date('c', $modifiedDate)
+        : null
+], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>
+</script>
+
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <!-- bootstrap grid css -->
 <link rel="stylesheet" href="../../../css/plugins/bootstrap-grid.css">
