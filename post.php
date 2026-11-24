@@ -145,21 +145,25 @@ if ($post) {
 <?php endif; ?>
 
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <!-- bootstrap grid css -->
-    <link rel="stylesheet" href="../css/plugins/bootstrap-grid.css">
-    <!-- font awesome css -->
-    <link rel="stylesheet" href="../css/plugins/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- swiper css -->
-    <link rel="stylesheet" href="../css/plugins/swiper.min.css">
-    <!-- fancybox css -->
-    <link rel="stylesheet" href="../css/plugins/fancybox.min.css">
-    <!-- ashley scss -->
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/custom.css">
+  <!-- bootstrap grid css -->
+<link rel="stylesheet" href="../../../css/plugins/bootstrap-grid.css">
 
+<!-- font awesome css -->
+<link rel="stylesheet" href="../../../css/plugins/font-awesome.min.css">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bzXgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<!-- swiper css -->
+<link rel="stylesheet" href="../../../css/plugins/swiper.min.css">
+
+<!-- fancybox css -->
+<link rel="stylesheet" href="../../../css/plugins/fancybox.min.css">
+
+<!-- ashley css -->
+<link rel="stylesheet" href="../../../css/style.css">
+<link rel="stylesheet" href="../../../css/custom.css">
 <style>
 /* Blog article table styling */
 .blog-article-content {
